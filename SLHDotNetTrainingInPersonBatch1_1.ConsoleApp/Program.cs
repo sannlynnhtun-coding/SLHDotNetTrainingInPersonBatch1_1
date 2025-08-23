@@ -22,5 +22,5 @@ SqlConnection connection = new SqlConnection(sqlConnectionStringBuilder.Connecti
 connection.Open();
 connection.Close();
 
-Console.ReadLine();
-//Console.ReadKey();
+//Console.ReadLine();
+Console.ReadKey();
