@@ -1,26 +1,39 @@
 ﻿using Microsoft.Data.SqlClient;
+using System.Data;
 
-Console.WriteLine("Hello, World!");
+//SqlConnectionStringBuilder sb = new SqlConnectionStringBuilder();
+//sb.DataSource = ".";
+//sb.InitialCatalog = "SLHDotNetTrainingInPersonBatch1";  
+//sb.UserID = "sa";
+//sb.Password = "sasa@123";
+//sb.TrustServerCertificate = true;
 
-string a = "";
+SqlConnectionStringBuilder sb = new SqlConnectionStringBuilder()
+{
+    DataSource = ".",
+    InitialCatalog = "SLHDotNetTrainingInPersonBatch1",
+    UserID = "sa",
+    Password = "sasa@123",
+    TrustServerCertificate = true
+};
 
-// Ctrl + .
+SqlConnection conn = new SqlConnection(sb.ConnectionString);
+conn.Open();
 
-//Ctrl + K, C
-//Ctrl + K, U
+string query = @"SELECT [StudentId]
+      ,[StudentNo]
+      ,[StudentName]
+      ,[FatherName]
+      ,[DateOfBirth]
+      ,[Gender]
+      ,[Address]
+      ,[MobileNo]
+      ,[DeleteFlag]
+  FROM [dbo].[Tbl_Student]";
 
-SqlConnectionStringBuilder sqlConnectionStringBuilder = new SqlConnectionStringBuilder();
-sqlConnectionStringBuilder.DataSource = "."; // Server name
-sqlConnectionStringBuilder.InitialCatalog = "SLHDotNetTrainingInPersonBatch1"; // Database name
-sqlConnectionStringBuilder.UserID = "sa"; // User name
-sqlConnectionStringBuilder.Password = "sasa@123"; // Password
-sqlConnectionStringBuilder.TrustServerCertificate = true; // For local development
+SqlCommand cmd = new SqlCommand(query, conn);
+SqlDataAdapter adapter = new SqlDataAdapter(cmd);
+DataTable dt = new DataTable();
+adapter.Fill(dt);
 
-Console.WriteLine(sqlConnectionStringBuilder.ConnectionString);
-
-SqlConnection connection = new SqlConnection(sqlConnectionStringBuilder.ConnectionString);
-connection.Open();
-connection.Close();
-
-//Console.ReadLine();
-Console.ReadKey();
+conn.Close();
