@@ -43,6 +43,18 @@ namespace SLHDotNetTrainingInPersonBatch1_1.ConsoleApp
             DataTable dt = new DataTable();
             adapter.Fill(dt);
 
+            //for (int i = 0; i < dt.Rows.Count; i++)
+            //{
+            //    DataRow dr = dt.Rows[i];
+            //    string no = dr["StudentNo"].ToString()!;
+            //    string name = dr["StudentName"].ToString()!;
+            //    Console.WriteLine($"{i + 1} {no} - {name}");
+            //}
+
+            #endregion
+
+            connection.Close();
+
             for (int i = 0; i < dt.Rows.Count; i++)
             {
                 DataRow dr = dt.Rows[i];
@@ -50,10 +62,6 @@ namespace SLHDotNetTrainingInPersonBatch1_1.ConsoleApp
                 string name = dr["StudentName"].ToString()!;
                 Console.WriteLine($"{i + 1} {no} - {name}");
             }
-
-            #endregion
-
-            connection.Close();
         }
 
         public void Create()
