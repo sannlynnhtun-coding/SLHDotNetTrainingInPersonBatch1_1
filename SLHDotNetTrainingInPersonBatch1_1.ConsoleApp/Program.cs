@@ -1,81 +1,39 @@
-﻿using Dapper;
-using Microsoft.Data.SqlClient;
-using SLHDotNetTrainingInPersonBatch1_1.ConsoleApp;
-using System.Collections.Generic;
-using System.Data;
+﻿using SLHDotNetTrainingInPersonBatch1_1.ConsoleApp;
 
-SqlConnectionStringBuilder sb = new SqlConnectionStringBuilder()
+AppDbContext db = new AppDbContext();
+List<StudentDto> lst = db.Students.ToList();
+foreach (var item in lst)
 {
-    DataSource = ".",
-    InitialCatalog = "SLHDotNetTrainingInPersonBatch1",
-    UserID = "sa",
-    Password = "sasa@123",
-    TrustServerCertificate = true
+    //string a = $"dsnfasid{item.StudentNo}fnsaidfasfnsanf";
+    Console.WriteLine($"{item.StudentNo} - {item.StudentName}");
+}
+
+StudentDto student = new StudentDto()
+{
+    StudentNo = "S004",
+    Address = "Address 004",
+    DateOfBirth = new DateTime(2000, 1, 1), // 1900-01-01 12:00:00 AM
+    //DeleteFlag = false,
+    FatherName = "Father",
+    Gender = "M",
+    MobileNo = "0912345678",
+    StudentName = "Student 004"
 };
+db.Students.Add(student);
+int result = db.SaveChanges();
 
-//using (IDbConnection db = new SqlConnection(sb.ConnectionString))
-//{
-//    db.Open();
-//    var query = db.Query<Student>("select * from tbl_student");
-//    List<Student> lst = query.ToList();
-//}
-
-using IDbConnection db = new SqlConnection(sb.ConnectionString);
-db.Open();
-List<Student> lst = db.Query<Student>("select * from tbl_student").ToList();
-for (int i = 0; i < lst.Count; i++)
+StudentDto? editStudent = db.Students.Where(x => x.StudentId == 10).FirstOrDefault();
+if (editStudent is not null)
 {
-    Student item = lst[i];
-    Console.WriteLine($"{i + 1} {item.StudentNo} - {item.StudentName}");
+    editStudent.FatherName = "New Father Name";
+    db.SaveChanges();
 }
 
-int no = 0;
-foreach (Student item in lst)
+StudentDto? removeStudent = db.Students.Where(x => x.StudentId == 11).FirstOrDefault();
+if (removeStudent is not null)
 {
-    Console.WriteLine($"{no + 1} {item.StudentNo} - {item.StudentName}");
-    no++;
+    db.Students.Remove(removeStudent);
+    db.SaveChanges();
 }
-
-//var query = db.Query<Student>("select * from tbl_student");
-//List<Student> lst = query.ToList();
 
 Console.ReadLine();
-
-//ITransfer transfer = new WavePayTransfer();
-//transfer.Transfer();
-
-//transfer = new KPayTransfer();
-//transfer.Transfer();
-
-
-//public interface ITransfer
-//{
-//    void Transfer();
-//    void TransactionHistory();
-//}
-
-//public class WavePayTransfer : ITransfer
-//{
-//    public void TransactionHistory()
-//    {
-//        Console.WriteLine("Wave Pay Transaction History");
-//    }
-
-//    public void Transfer()
-//    {
-//        Console.WriteLine("Wave Pay Transfer");
-//    }
-//}
-
-//public class KPayTransfer : ITransfer
-//{
-//    public void TransactionHistory()
-//    {
-//        Console.WriteLine("KPay Transaction History");
-//    }
-
-//    public void Transfer()
-//    {
-//        Console.WriteLine("KPay Transfer");
-//    }
-//}
