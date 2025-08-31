@@ -1,11 +1,16 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.14.36408.4 d17.14
+VisualStudioVersion = 17.14.36408.4
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SLHDotNetTrainingInPersonBatch1_1", "SLHDotNetTrainingInPersonBatch1_1\SLHDotNetTrainingInPersonBatch1_1.csproj", "{A1F5AC3A-A43E-46D9-961C-DD3334723F4C}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SLHDotNetTrainingInPersonBatch1_1.ConsoleApp", "SLHDotNetTrainingInPersonBatch1_1.ConsoleApp\SLHDotNetTrainingInPersonBatch1_1.ConsoleApp.csproj", "{089B5BCE-9498-45B7-B7FB-3F584828F658}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{8EC462FD-D22E-90A8-E5CE-7E832BA40C5D}"
+	ProjectSection(SolutionItems) = preProject
+		README.md = README.md
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
